@@ -1,9 +1,11 @@
 package main
 
 import (
-	"fmt"
+	// "fmt"
 	"database/sql"
 	"log"
+
+	"github.com/gin-gonic/gin"	
 
 	_ "github.com/lib/pq"
 )
@@ -22,21 +24,48 @@ func main() {
 	}
 	defer Db.Close()
 
-	sql := "SELECT * FROM TEST_USER WHERE USER_ID = $1;"
+	// sql := "SELECT * FROM TEST_USER WHERE USER_ID = $1;"
 
-	pstatement, err := Db.Prepare(sql)
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer pstatement.Close()
+	// pstatement, err := Db.Prepare(sql)
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+	// defer pstatement.Close()
 
-	qeury := 1
-	var testUser TestUser
+	// qeury := 1
+	// var testUser TestUser
 
-	err = pstatement.QueryRow(qeury).Scan(&testUser.UserID, &testUser.Password)
-	if err != nil {
-		log.Fatal(err)
-	}
+	// err = pstatement.QueryRow(qeury).Scan(&testUser.UserID, &testUser.Password)
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
 
-	fmt.Println(testUser.UserID, testUser.Password)
+	// fmt.Println(testUser.UserID, testUser.Password)
+	router := gin.Default()
+    router.LoadHTMLGlob("frontend/*.html")
+
+    router.GET("/", func(ctx *gin.Context){
+		sql := "SELECT * FROM TEST_USER"
+		var testUser []TestUser
+		rows, err := Db.Query(sql)
+		if err != nil {
+			log.Fatal(err)
+		}
+		defer rows.Close()
+
+		for rows.Next() {
+			var user TestUser
+			err := rows.Scan(&user.UserID, &user.Password)
+			if err != nil {
+				log.Fatal(err)
+			}
+			testUser = append(testUser, user)
+		}
+
+		ctx.HTML(200, "index.html", gin.H{
+			"testUser": testUser,
+		})
+    })
+
+    router.Run()
 }
