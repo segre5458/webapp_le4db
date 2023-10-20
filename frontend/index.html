@@ -5,6 +5,7 @@
     <title>表の表示</title>
 </head>
 <body>
+    <h1>表の表示</h1>
     <table border="1">
         <thead>
             <tr>
@@ -21,5 +22,11 @@
             {{ end }}
         </tbody>
     </table>
+
+    <form action="/add" method="post">
+        <input type="text" name="userID" placeholder="ユーザーID">
+        <input type="text" name="password" placeholder="パスワード">
+        <input type="submit" value="追加">
+    </form>
 </body>
 </html>

@@ -67,5 +67,18 @@ func main() {
 		})
     })
 
+	router.POST("/add", func(ctx *gin.Context){
+		userID := ctx.PostForm("userID")
+		password := ctx.PostForm("password")
+
+		sql := "INSERT INTO TEST_USER (user_id, user_password) VALUES ($1, $2)"
+		_, err := Db.Exec(sql, userID, password)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		ctx.Redirect(302, "/")
+	})
+
     router.Run()
 }
