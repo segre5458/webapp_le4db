@@ -24,23 +24,6 @@ func main() {
 	}
 	defer Db.Close()
 
-	// sql := "SELECT * FROM TEST_USER WHERE USER_ID = $1;"
-
-	// pstatement, err := Db.Prepare(sql)
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-	// defer pstatement.Close()
-
-	// qeury := 1
-	// var testUser TestUser
-
-	// err = pstatement.QueryRow(qeury).Scan(&testUser.UserID, &testUser.Password)
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-
-	// fmt.Println(testUser.UserID, testUser.Password)
 	router := gin.Default()
     router.LoadHTMLGlob("frontend/*.html")
 
@@ -109,6 +92,18 @@ func main() {
 			"testUser": testUser,
 		})
 	})
+
+	router.POST("/delete", func(ctx *gin.Context){
+        userID := ctx.PostForm("userID")
+
+        sql := "DELETE FROM TEST_USER WHERE USER_ID = $1"
+        _, err := Db.Exec(sql, userID)
+        if err != nil {
+            log.Fatal(err)
+        }
+
+        ctx.Redirect(302, "/")
+    })
 
     router.Run()
 }
