@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>表の表示</title>
+</head>
+<body>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>パスワード</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{ range .testUser }}
+            <tr>
+                <td>{{ .UserID }}</td>
+                <td>{{ .Password }}</td>
+            </tr>
+            {{ end }}
+        </tbody>
+    </table>
+</body>
+</html>
