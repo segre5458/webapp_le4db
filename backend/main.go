@@ -80,5 +80,35 @@ func main() {
 		ctx.Redirect(302, "/")
 	})
 
+	router.GET("/search", func(ctx *gin.Context){
+		userID := ctx.Query("userID")
+
+		sql := "SELECT * FROM TEST_USER WHERE USER_ID = $1"
+		var testUser []TestUser
+		rows, err := Db.Query(sql, userID)
+		defer rows.Close()
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		for rows.Next() {
+			var user TestUser
+			err := rows.Scan(&user.UserID, &user.Password)
+			if err != nil {
+				if err.Error() == "sql: no rows in result set" {
+					ctx.HTML(200, "index.html", gin.H{
+						"message": "No User",
+					})
+				} else {
+					log.Fatal(err)
+				}
+			}
+			testUser = append(testUser, user)
+		}
+		ctx.HTML(200, "index.html", gin.H{
+			"testUser": testUser,
+		})
+	})
+
     router.Run()
 }

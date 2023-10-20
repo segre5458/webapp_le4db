@@ -14,10 +14,16 @@
             </tr>
         </thead>
         <tbody>
+            {{ if .testUser }}
             {{ range .testUser }}
             <tr>
                 <td>{{ .UserID }}</td>
                 <td>{{ .Password }}</td>
+            </tr>
+            {{ end }}
+            {{ else }}
+            <tr>
+                <td colspan="2">該当するレコードが見つかりません。</td>
             </tr>
             {{ end }}
         </tbody>
@@ -27,6 +33,11 @@
         <input type="text" name="userID" placeholder="ユーザーID">
         <input type="text" name="password" placeholder="パスワード">
         <input type="submit" value="追加">
+    </form>
+
+    <form action="/search" method="get">
+        <input type="text" name="userID" placeholder="ユーザーID">
+        <input type="submit" value="検索">
     </form>
 </body>
 </html>
