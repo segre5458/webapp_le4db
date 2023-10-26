@@ -11,12 +11,12 @@ func SetupRoutes(router *gin.Engine, context *gin.Context, Db *sql.DB) {
         controllers.Index(c, Db)
     })
     router.POST("/add", func(c *gin.Context) {
-        controllers.AddUser(c, Db)
+        controllers.AddRack(c, Db)
     })
     router.GET("/search", func(c *gin.Context) {
-        controllers.SearchUser(c, Db)
+        controllers.SearchRack(c, Db)
     })
     router.POST("/delete", func(c *gin.Context) {
-        controllers.DeleteUser(c, Db)
+        controllers.DeleteRack(c, Db)
     })
 }

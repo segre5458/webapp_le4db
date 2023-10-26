@@ -9,35 +9,38 @@ import (
 	"github.com/segre5458/webapp_le4db/backend/models"
 )
 
-func Index(ctx *gin.Context, Db *sql.DB) {
-	sql := "SELECT * FROM TEST_USER"
-	var testUser []models.TestUser
-	rows, err := Db.Query(sql)
+func Index(ctx *gin.Context, DB *sql.DB) {
+	sql := "SELECT * FROM RACK"
+	var racks []models.Rack
+	rows, err := DB.Query(sql)
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer rows.Close()
 
 	for rows.Next() {
-		var user models.TestUser
-		err := rows.Scan(&user.UserID, &user.Password)
+		var rack models.Rack
+		err := rows.Scan(&rack.Height, &rack.UnitNumber, &rack.Width, &rack.Specification, &rack.Depth)
 		if err != nil {
 			log.Fatal(err)
 		}
-		testUser = append(testUser, user)
+		racks = append(racks, rack)
 	}
 
 	ctx.HTML(200, "index.html", gin.H{
-		"testUser": testUser,
+		"racks": racks,
 	})
 }
 
-func AddUser(ctx *gin.Context, Db *sql.DB) {
-	userID := ctx.PostForm("userID")
-	password := ctx.PostForm("password")
+func AddRack(ctx *gin.Context, DB *sql.DB) {
+	height := ctx.PostForm("height")
+	unitNumber := ctx.PostForm("unitNumber")
+	width := ctx.PostForm("width")
+	specification := ctx.PostForm("specification")
+	depth := ctx.PostForm("depth")
 
-	sql := "INSERT INTO TEST_USER (user_id, user_password) VALUES ($1, $2)"
-	_, err := Db.Exec(sql, userID, password)
+	sql := "INSERT INTO RACK (height, unit_number, width, specification, depth) VALUES ($1, $2, $3, $4, $5)"
+	_, err := DB.Exec(sql, height, unitNumber, width, specification, depth)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -45,41 +48,35 @@ func AddUser(ctx *gin.Context, Db *sql.DB) {
 	ctx.Redirect(302, "/")
 }
 
-func SearchUser(ctx *gin.Context, Db *sql.DB) {
-	userID := ctx.Query("userID")
+func SearchRack(ctx *gin.Context, DB *sql.DB) {
+	unitNumber := ctx.Query("unitNumber")
 
-	sql := "SELECT * FROM TEST_USER WHERE USER_ID = $1"
-	var testUser []models.TestUser
-	rows, err := Db.Query(sql, userID)
+	sql := "SELECT * FROM RACK WHERE unit_number = $1"
+	var racks []models.Rack
+	rows, err := DB.Query(sql, unitNumber)
 	defer rows.Close()
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	for rows.Next() {
-		var user models.TestUser
-		err := rows.Scan(&user.UserID, &user.Password)
+		var rack models.Rack
+		err := rows.Scan(&rack.Height, &rack.UnitNumber, &rack.Width, &rack.Specification, &rack.Depth)
 		if err != nil {
-			if err.Error() == "sql: no rows in result set" {
-				ctx.HTML(200, "index.html", gin.H{
-					"message": "No User",
-				})
-			} else {
-				log.Fatal(err)
-			}
+			log.Fatal(err)
 		}
-		testUser = append(testUser, user)
+		racks = append(racks, rack)
 	}
 	ctx.HTML(200, "index.html", gin.H{
-		"testUser": testUser,
+		"racks": racks,
 	})
 }
 
-func DeleteUser(ctx *gin.Context, Db *sql.DB) {
-	userID := ctx.PostForm("userID")
+func DeleteRack(ctx *gin.Context, DB *sql.DB) {
+	unitNumber := ctx.PostForm("unitNumber")
 
-	sql := "DELETE FROM TEST_USER WHERE USER_ID = $1"
-	_, err := Db.Exec(sql, userID)
+	sql := "DELETE FROM RACK WHERE unit_number = $1"
+	_, err := DB.Exec(sql, unitNumber)
 	if err != nil {
 		log.Fatal(err)
 	}

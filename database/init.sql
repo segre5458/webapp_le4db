@@ -1,4 +1,4 @@
-CREATE TABLE rack (
+CREATE TABLE RACK (
     height integer NOT NULL,
     unit_number integer NOT NULL CHECK (unit_number >= 1 AND unit_number <= 100),
     width integer NOT NULL,
@@ -6,7 +6,7 @@ CREATE TABLE rack (
     depth integer NOT NULL
 );
 
-CREATE TABLE server (
+CREATE TABLE SERVER (
     server_name character varying NOT NULL,
     ip_address character varying NOT NULL,
     os character varying NOT NULL,
@@ -16,15 +16,15 @@ CREATE TABLE server (
     nic_mac_address character varying NOT NULL
 );
 
-CREATE TABLE server_placement (
+CREATE TABLE SERVER_PALCEMENT (
     nic_mac_address character varying NOT NULL,
     rack_unit_number integer NOT NULL
 );
 
-ALTER TABLE server_placement
-    ADD CONSTRAINT placement_unique_unit_number UNIQUE (rack_unit_number);
+ALTER TABLE SERVER_PALCEMENT
+    ADD CONSTRAINT PALCEMENT_UNIQUE_UNIT_NUMBER UNIQUE (rack_unit_number);
 
-CREATE TABLE network_device (
+CREATE TABLE NETWORK_DEVICE (
     device_name character varying NOT NULL,
     port_count integer NOT NULL,
     ip_addresses inet[] NOT NULL,
@@ -32,26 +32,27 @@ CREATE TABLE network_device (
     port_mac_addresses character varying[] NOT NULL
 );
 
-CREATE TABLE network_device_placement (
+CREATE TABLE NETWORK_DEVICE_PLACEMENT (
     port_mac_address character varying NOT NULL,
     rack_unit_number integer NOT NULL
 );
 
-ALTER TABLE network_device_placement
-    ADD CONSTRAINT placement_unique_unit_number UNIQUE (rack_unit_number);
+ALTER TABLE NETWORK_DEVICE_PLACEMENT
+    ADD CONSTRAINT PLACEMENT_UNIQUE_UNIT_NUMBER UNIQUE (rack_unit_number);
 
-CREATE TABLE DCuser (
+CREATE TABLE DCUSER (
     uid character varying NOT NULL,
     name character varying NOT NULL
 );
 
-CREATE TABLE charge (
+CREATE TABLE CHARGE (
     uid character varying NOT NULL,
     server_or_network_device_name character varying NOT NULL
 );
 
-CREATE TABLE connection (
+CREATE TABLE CONNECTION (
     rack_number integer NOT NULL,
     note character varying NOT NULL,
     server_or_network_device_name character varying NOT NULL
 );
+
