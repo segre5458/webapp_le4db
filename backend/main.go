@@ -7,7 +7,6 @@ import (
 	_ "github.com/lib/pq"
 	"github.com/gin-gonic/gin"
 	"github.com/segre5458/webapp_le4db/backend/routes"
-	"github.com/segre5458/webapp_le4db/backend/controllers"
 )
 
 func main() {
@@ -22,7 +21,8 @@ func main() {
 	router := gin.Default()
     router.LoadHTMLGlob("frontend/*.html")
 
-	routes.SetupRoutes(router, Db)
+	context := &gin.Context{}
+	routes.SetupRoutes(router,context, Db)
 
     router.Run()
 }

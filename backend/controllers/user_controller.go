@@ -11,7 +11,7 @@ import (
 
 func Index(ctx *gin.Context, Db *sql.DB) {
 	sql := "SELECT * FROM TEST_USER"
-	var testUser []TestUser
+	var testUser []models.TestUser
 	rows, err := Db.Query(sql)
 	if err != nil {
 		log.Fatal(err)
@@ -19,7 +19,7 @@ func Index(ctx *gin.Context, Db *sql.DB) {
 	defer rows.Close()
 
 	for rows.Next() {
-		var user TestUser
+		var user models.TestUser
 		err := rows.Scan(&user.UserID, &user.Password)
 		if err != nil {
 			log.Fatal(err)
@@ -49,7 +49,7 @@ func SearchUser(ctx *gin.Context, Db *sql.DB) {
 	userID := ctx.Query("userID")
 
 	sql := "SELECT * FROM TEST_USER WHERE USER_ID = $1"
-	var testUser []TestUser
+	var testUser []models.TestUser
 	rows, err := Db.Query(sql, userID)
 	defer rows.Close()
 	if err != nil {
@@ -57,7 +57,7 @@ func SearchUser(ctx *gin.Context, Db *sql.DB) {
 	}
 
 	for rows.Next() {
-		var user TestUser
+		var user models.TestUser
 		err := rows.Scan(&user.UserID, &user.Password)
 		if err != nil {
 			if err.Error() == "sql: no rows in result set" {
