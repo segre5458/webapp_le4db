@@ -2,13 +2,29 @@ package routes
 
 import (
 	"database/sql"
+
 	"github.com/gin-gonic/gin"
+	"github.com/gin-contrib/sessions"
+
 	"github.com/segre5458/webapp_le4db/backend/controllers"
 )
 
 func SetupRoutes(router *gin.Engine, context *gin.Context, Db *sql.DB) {
+    router.GET("/login", func(c *gin.Context) {
+        c.HTML(200, "login.html", gin.H{})
+    })
+    router.POST("/login", func(c *gin.Context) {
+        controllers.Login(c, Db)
+    })
+
 	router.GET("/", func(c *gin.Context) {
-        controllers.Index(c, Db)
+        session := sessions.Default(c)
+        user := session.Get("authenticatedUser")
+        if user != nil {
+            controllers.Index(c, Db)
+        } else {
+            c.Redirect(302, "/login")
+        }
     })
 
     router.POST("/add", func(c *gin.Context) {
@@ -45,5 +61,4 @@ func SetupRoutes(router *gin.Engine, context *gin.Context, Db *sql.DB) {
     router.POST("/rack/:unitNumber/networkDevice/delete", func(c *gin.Context) {
         controllers.DeleteNetworkDevice(c, Db)
     })
-
 }

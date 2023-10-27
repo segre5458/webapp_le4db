@@ -44,11 +44,11 @@ INSERT INTO NETWORK_DEVICE_PLACEMENT VALUES ('00:00:00:00:00:17', 6);
 INSERT INTO NETWORK_DEVICE_PLACEMENT VALUES ('00:00:00:00:00:18', 6);
 
 DELETE FROM DCUSER;
-INSERT INTO DCUSER VALUES ('U1', 'user1');
-INSERT INTO DCUSER VALUES ('U2', 'user2');
-INSERT INTO DCUSER VALUES ('U3', 'user3');
-INSERT INTO DCUSER VALUES ('U4', 'user4');
-INSERT INTO DCUSER VALUES ('U5', 'user5');
+INSERT INTO DCUSER VALUES ('U1', 'user1', 'password1', 'user1@example.com');
+INSERT INTO DCUSER VALUES ('U2', 'user2', 'password2', 'user2@example.com');
+INSERT INTO DCUSER VALUES ('U3', 'user3', 'password3', 'user3@example.com');
+INSERT INTO DCUSER VALUES ('U4', 'user4', 'password4', 'user4@example.com');
+INSERT INTO DCUSER VALUES ('U5', 'user5', 'password5', 'user5@example.com');
 
 DELETE FROM CHARGE;
 INSERT INTO CHARGE VALUES ('U1', 'server1');

@@ -38,7 +38,9 @@ type NetworkDevicePlacement struct {
 
 type DCUser struct {
     Uid string
-    Name string
+	Name string
+	Password string
+	Email string
 }
 
 type Table struct {
