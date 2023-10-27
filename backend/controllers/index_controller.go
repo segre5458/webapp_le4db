@@ -83,3 +83,35 @@ func DeleteRack(ctx *gin.Context, DB *sql.DB) {
 
 	ctx.Redirect(302, "/")
 }
+
+func EditRack(ctx *gin.Context, DB *sql.DB) {
+	unitNumber := ctx.Param("unitNumber")
+	var rack models.Rack
+
+	sql := "SELECT * FROM RACK WHERE unit_number = $1"
+	row := DB.QueryRow(sql, unitNumber)
+	err := row.Scan(&rack.Height, &rack.UnitNumber, &rack.Width, &rack.Specification, &rack.Depth)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	ctx.HTML(200, "edit_index.html", gin.H{
+		"rack": rack,
+	})
+}
+
+func UpdateRack(ctx *gin.Context, DB *sql.DB) {
+	height := ctx.PostForm("height")
+	unitNumber := ctx.PostForm("unitNumber")
+	width := ctx.PostForm("width")
+	specification := ctx.PostForm("specification")
+	depth := ctx.PostForm("depth")
+
+	sql := "UPDATE RACK SET height = $1, width = $2, specification = $3, depth = $4 WHERE unit_number = $5"
+	_, err := DB.Exec(sql, height, width, specification, depth, unitNumber)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	ctx.Redirect(302, "/")
+}
