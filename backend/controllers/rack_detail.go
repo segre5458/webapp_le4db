@@ -37,13 +37,10 @@ func Rack(ctx *gin.Context, DB *sql.DB) {
 	}
 
 	sql = `
-	SELECT *
-	FROM NETWORK_DEVICE
-	WHERE NETWORK_DEVICE.port_mac_addresses @> (
-		SELECT ARRAY_AGG(NETWORK_DEVICE_PLACEMENT.port_mac_address)
-		FROM NETWORK_DEVICE_PLACEMENT
-		WHERE NETWORK_DEVICE_PLACEMENT.rack_unit_number = $1
-	);	
+	SELECT DISTINCT nd.*
+	FROM NETWORK_DEVICE nd
+	JOIN NETWORK_DEVICE_PLACEMENT ndp ON nd.port_mac_addresses @> ARRAY[ndp.port_mac_address]
+	WHERE ndp.rack_unit_number = $1;
 	`
 	var networkDevices []models.NetworkDevice
 	rows, err = DB.Query(sql, unitNumber)
@@ -70,5 +67,6 @@ func Rack(ctx *gin.Context, DB *sql.DB) {
 	ctx.HTML(200, "rack.html", gin.H{
 		"servers": servers,
 		"networkDevices": networkDevices,
+		"unitNumber": unitNumber,
 	})
 }
