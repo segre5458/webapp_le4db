@@ -9,8 +9,8 @@
     <table border="1">
         <thead>
             <tr>
-                <th>高さ</th>
                 <th>ラック番号</th>
+                <th>高さ</th>
                 <th>幅</th>
                 <th>仕様</th>
                 <th>奥行き</th>
@@ -20,11 +20,14 @@
             {{ if .racks }}
             {{ range .racks }}
             <tr>
-                <td>{{ .Height }}</td>
                 <td>{{ .UnitNumber }}</td>
+                <td>{{ .Height }}</td>
                 <td>{{ .Width }}</td>
                 <td>{{ .Specification }}</td>
                 <td>{{ .Depth }}</td>
+                <td>
+                    <a href="/rack/{{ .UnitNumber }}">ラックの詳細</a>
+                </td>
             </tr>
             {{ end }}
             {{ else }}
@@ -36,8 +39,8 @@
     </table>
 
     <form action="/add" method="post">
-        <input type="text" name="height" placeholder="高さ">
         <input type="text" name="unitNumber" placeholder="ラック番号">
+        <input type="text" name="height" placeholder="高さ">
         <input type="text" name="width" placeholder="幅">
         <input type="text" name="specification" placeholder="仕様">
         <input type="text" name="depth" placeholder="奥行き">

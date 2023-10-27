@@ -19,4 +19,7 @@ func SetupRoutes(router *gin.Engine, context *gin.Context, Db *sql.DB) {
     router.POST("/delete", func(c *gin.Context) {
         controllers.DeleteRack(c, Db)
     })
+	router.GET("/rack/:unitNumber", func(c *gin.Context) {
+		controllers.Rack(c, Db)
+	})
 }

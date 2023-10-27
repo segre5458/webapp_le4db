@@ -31,6 +31,11 @@ type NetworkDevice struct {
     PortMacAddress []string
 }
 
+type NetworkDevicePlacement struct {
+    PortMacAddress string
+    RackUnitNumber int
+}
+
 type DCUser struct {
     Uid string
     Name string
