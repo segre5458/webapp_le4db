@@ -26,8 +26,8 @@
                 <td>{{ .Specification }}</td>
                 <td>{{ .Depth }}</td>
                 <td>
-                    <a href="/rack/{{ .UnitNumber }}/" {{if or (eq $.Role "rack") (eq $.Role "nw") (eq $.Role "server") (eq $.Role "admin") (eq $.Role "guest") }}onclick="return false;" style="color: gray;"{{ end }}>ラックの詳細</a>
-                    <a href="/edit/{{ .UnitNumber }}/" {{if or (eq $.Role "rack") (eq $.Role "admin") }}onclick="return false;" style="color: gray;"{{ end }}>情報の編集</a>
+                    <a href="/rack/{{ .UnitNumber }}/" {{if and (ne $.Role "rack") (ne $.Role "nw") (ne $.Role "server") (ne $.Role "admin") (ne $.Role "guest") }}onclick="return false;" style="color: gray;"{{ end }}>ラックの詳細</a>
+                    <a href="/edit/{{ .UnitNumber }}/" {{if and (ne $.Role "rack") (ne $.Role "admin") }}onclick="return false;" style="color: gray;"{{ end }}>情報の編集</a>
                 </td>
             </tr>
             {{ end }}
