@@ -57,6 +57,12 @@ func SetupRoutes(router *gin.Engine, context *gin.Context, Db *sql.DB) {
     router.POST("/rack/:unitNumber/server/delete", func(c *gin.Context) {
         controllers.DeleteServer(c, Db)
     })
+    router.GET("/rack/:unitNumber/server/edit/:serverName", func(c *gin.Context) {
+        controllers.EditServer(c, Db)
+    })
+    router.POST("/rack/:unitNumber/server/update/:serverName", func(c *gin.Context) {
+        controllers.UpdateServer(c, Db)
+    })
 
     router.POST("/rack/:unitNumber/networkDevice/add", func(c *gin.Context) {
         controllers.AddNetworkDevice(c, Db)
@@ -66,5 +72,11 @@ func SetupRoutes(router *gin.Engine, context *gin.Context, Db *sql.DB) {
     })
     router.POST("/rack/:unitNumber/networkDevice/delete", func(c *gin.Context) {
         controllers.DeleteNetworkDevice(c, Db)
+    })
+    router.GET("/rack/:unitNumber/networkDevice/edit/:deviceName", func(c *gin.Context) {
+        controllers.EditNetworkDevice(c, Db)
+    })
+    router.POST("/rack/:unitNumber/networkDevice/update/:deviceName", func(c *gin.Context) {
+        controllers.UpdateNetworkDevice(c, Db)
     })
 }

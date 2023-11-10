@@ -22,6 +22,9 @@
             <td>{{ .Cpu }}</td>
             <td>{{ .Memory }}</td>
             <td>{{ .Storage }}</td>
+            <td>
+                <a href="/rack/{{ $.unitNumber }}/server/edit/{{ .ServerName }}">情報の編集</a>
+            </td>
         </tr>
         {{ end }}
         {{ else }}
@@ -60,6 +63,9 @@
                 {{ range .PortMacAddress }}
                     <li>{{ . }}</li>
                 {{ end }}
+            </td>
+            <td>
+                <a href="/rack/{{ $.unitNumber }}/networkDevice/edit/{{ .DeviceName }}">情報の編集</a>
             </td>
         </tr>
         {{ end }}

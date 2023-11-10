@@ -65,8 +65,8 @@ func Rack(ctx *gin.Context, DB *sql.DB) {
 	}
 
 	ctx.HTML(200, "rack.html", gin.H{
+		"unitNumber": unitNumber,
 		"servers": servers,
 		"networkDevices": networkDevices,
-		"unitNumber": unitNumber,
 	})
 }

@@ -82,3 +82,55 @@ func DeleteServer(ctx *gin.Context, DB *sql.DB) {
 
 	ctx.Redirect(302, "/rack/"+unitNumber)
 }
+
+func EditServer(ctx *gin.Context, DB *sql.DB) {
+	serverName := ctx.Param("serverName")
+	unitNumber := ctx.Param("unitNumber")
+
+	sql := "SELECT * FROM SERVER WHERE server_name = $1"
+	var servers []models.Server
+	rows, err := DB.Query(sql, serverName)
+	defer rows.Close()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	for rows.Next() {
+		var server models.Server
+		err := rows.Scan(&server.ServerName, &server.IpAddress, &server.Os, &server.Cpu, &server.Memory, &server.Storage, &server.NicMacAddress)
+		if err != nil {
+			log.Fatal(err)
+		}
+		servers = append(servers, server)
+	}
+
+	ctx.HTML(200, "edit_server.html", gin.H{
+		"server": servers[0],
+		"unitNumber": unitNumber,
+	})
+}
+
+func UpdateServer(ctx *gin.Context, DB *sql.DB) {
+	unitNumber := ctx.Param("unitNumber")
+	serverName := ctx.Param("serverName")
+	ipAddress := ctx.PostForm("ipAddress")
+	os := ctx.PostForm("os")
+	cpu := ctx.PostForm("cpu")
+	memory := ctx.PostForm("memory")
+	storage := ctx.PostForm("storage")
+	nicMacAddress := ctx.PostForm("nicMacAddress")
+
+	sql := "UPDATE SERVER SET ip_address = $1, os = $2, cpu = $3, memory = $4, storage = $5, nic_mac_address = $6 WHERE server_name = $7"
+	_, err := DB.Exec(sql, ipAddress, os, cpu, memory, storage, nicMacAddress, serverName)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	sql = "UPDATE SERVER_PLACEMENT SET nic_mac_address = $1 WHERE rack_unit_number = $2"
+	_, err = DB.Exec(sql, nicMacAddress, unitNumber)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	ctx.Redirect(302, "/rack/"+unitNumber)
+}
