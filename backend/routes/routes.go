@@ -4,7 +4,6 @@ import (
 	"database/sql"
 
 	"github.com/gin-gonic/gin"
-	// "github.com/gin-contrib/sessions"
 
 	"github.com/segre5458/webapp_le4db/backend/controllers"
 	"github.com/segre5458/webapp_le4db/backend/middleware"
