@@ -27,9 +27,9 @@ services:
     container_name: frontend
     build: 
       context: .
-      dockerfile: ./frontend/Dockerfile
+      dockerfile: ./frontend-react/Dockerfile
     volumes:
-      - ./frontend:/app:cached
+      - ./frontend-react:/app:cached
       - node_modules:/app/node_modules
     ports:
       - "3000:3000"
