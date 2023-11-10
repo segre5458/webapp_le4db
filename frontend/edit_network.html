@@ -6,7 +6,7 @@
 </head>
 <body>
     <h1>ネットワーク機器情報編集</h1>
-    <from action="/rack/{{ .rack.UnitNumber }}/network_device/update/{{ .networkDevice.DeviceName }}" method="post">
+    <form action="/rack/{{ .unitNumber }}/networkDevice/update/{{ .networkDevice.DeviceName }}" method="post">
         <div>
             <label for="deviceName">機器名:</label>
             <input type="text" id="deviceName" name="deviceName" value="{{ .networkDevice.DeviceName }}" required>
@@ -17,7 +17,7 @@
         </div>
         <div>
             <label for="ipAddress">IPアドレス:</label>
-            <input type="text" id="ipAddress" name="ipAddress" value="{{ .networkDevice.IpAddress }}" required>
+            <input type="text" id="ipAddress" name="ipAddress" value="{{ .IpAddressStr }}" required>
         </div>
         <div>
             <label for="role">役割:</label>
@@ -25,7 +25,7 @@
         </div>
         <div>
             <label for="macAddress">MACアドレス:</label>
-            <input type="text" id="macAddress" name="macAddress" value="{{ .networkDevice.MacAddress }}" required>
+            <input type="text" id="portMacAddress" name="portMacAddress" value="{{ .portMacAddressStr }}" required>
         </div>
         <div>
             <button type="submit">更新</button>

@@ -37,10 +37,14 @@ func Rack(ctx *gin.Context, DB *sql.DB) {
 	}
 
 	sql = `
-	SELECT DISTINCT nd.*
-	FROM NETWORK_DEVICE nd
-	JOIN NETWORK_DEVICE_PLACEMENT ndp ON nd.port_mac_addresses @> ARRAY[ndp.port_mac_address]
-	WHERE ndp.rack_unit_number = $1;
+	SELECT DISTINCT
+	nd.*
+	FROM
+	network_device nd
+	JOIN
+	network_device_placement ndp ON ndp.port_mac_address = ANY(nd.port_mac_addresses)
+	WHERE
+	ndp.rack_unit_number = $1;
 	`
 	var networkDevices []models.NetworkDevice
 	rows, err = DB.Query(sql, unitNumber)

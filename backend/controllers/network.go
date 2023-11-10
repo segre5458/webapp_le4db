@@ -91,6 +91,7 @@ func DeleteNetworkDevice(ctx *gin.Context, DB *sql.DB) {
 
 func EditNetworkDevice(ctx *gin.Context, DB *sql.DB) {
 	deviceName := ctx.Param("deviceName")
+	unitNumber := ctx.Param("unitNumber")
 
 	sql := "SELECT * FROM NETWORK_DEVICE WHERE device_name = $1"
 	var networkDevices []models.NetworkDevice
@@ -100,10 +101,10 @@ func EditNetworkDevice(ctx *gin.Context, DB *sql.DB) {
 		log.Fatal(err)
 	}
 
+	var IpAddressStr string
+	var portMacAddressStr string
 	for rows.Next() {
 		var networkDevice models.NetworkDevice
-		var IpAddressStr string
-		var portMacAddressStr string
 
 		err := rows.Scan(&networkDevice.DeviceName, &networkDevice.PortCount, &IpAddressStr, &networkDevice.Role, &portMacAddressStr)
 		if err != nil {
@@ -114,9 +115,14 @@ func EditNetworkDevice(ctx *gin.Context, DB *sql.DB) {
 
 		networkDevices = append(networkDevices, networkDevice)
 	}
+	IpAddressStr = strings.Trim(IpAddressStr, "{}")
+	portMacAddressStr = strings.Trim(portMacAddressStr, "{}")
 
-	ctx.HTML(200, "edit_rack.html", gin.H{
-		"networkDevices": networkDevices,
+	ctx.HTML(200, "edit_network.html", gin.H{
+		"networkDevice": networkDevices[0],
+		"unitNumber": unitNumber,
+		"IpAddressStr": IpAddressStr,
+		"portMacAddressStr": portMacAddressStr,
 	})
 }
 
@@ -124,9 +130,9 @@ func UpdateNetworkDevice(ctx *gin.Context, DB *sql.DB) {
 	unitNumber := ctx.Param("unitNumber")
 	deviceName := ctx.Param("deviceName")
 	portCount := ctx.PostForm("portCount")
-	ipAddressesStr := ctx.PostForm("ipAddresses")
+	ipAddressesStr := ctx.PostForm("ipAddress")
 	role := ctx.PostForm("role")
-	portMacAddressesStr := ctx.PostForm("portMacAddresses")
+	portMacAddressesStr := ctx.PostForm("portMacAddress")
 
 	ipAddressesSlice := strings.Split(ipAddressesStr, ",")
 	portMacAddressesSlice := strings.Split(portMacAddressesStr, ",")
