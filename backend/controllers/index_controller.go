@@ -2,8 +2,10 @@ package controllers
 
 import (
 	"database/sql"
+	"fmt"
 	"log"
 
+	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 
 	"github.com/segre5458/webapp_le4db/backend/models"
@@ -11,6 +13,9 @@ import (
 
 func Index(ctx *gin.Context, DB *sql.DB) {
 	sql := "SELECT * FROM RACK"
+	session := sessions.Default(ctx)
+	userRole := session.Get("role")
+	fmt.Println(userRole)
 	var racks []models.Rack
 	rows, err := DB.Query(sql)
 	if err != nil {
@@ -29,6 +34,7 @@ func Index(ctx *gin.Context, DB *sql.DB) {
 
 	ctx.HTML(200, "index.html", gin.H{
 		"racks": racks,
+		"Role": userRole,
 	})
 }
 

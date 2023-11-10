@@ -22,7 +22,7 @@ func Login(ctx *gin.Context, DB *sql.DB) {
 	row := DB.QueryRow(sql, loginRequest.Username, loginRequest.Password)
 
 	var dcuser models.DCUser
-	err := row.Scan(&dcuser.Uid, &dcuser.Name, &dcuser.Password, &dcuser.Email)
+	err := row.Scan(&dcuser.Uid, &dcuser.Name, &dcuser.Password, &dcuser.Email, &dcuser.Role)
 	if err != nil {
 		log.Println(err)
 		ctx.HTML(400, "login.html", gin.H{"error": "Invalid username or password"})
@@ -31,6 +31,7 @@ func Login(ctx *gin.Context, DB *sql.DB) {
 
 	session := sessions.Default(ctx)
 	session.Set("authenticatedUser", loginRequest.Username)
+	session.Set("role", dcuser.Role)
 	session.Save()
 
 	ctx.Redirect(302, "/")

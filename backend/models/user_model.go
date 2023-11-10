@@ -41,6 +41,7 @@ type DCUser struct {
 	Name string
 	Password string
 	Email string
+    Role string
 }
 
 type Table struct {
