@@ -23,7 +23,7 @@ services:
     links:
       - postgres
     tty: true 
-    image: ghcr.io/segre5458/le4db/le4db:latest
+    image: ghcr.io/segre5458/webapp/le4db:latest
   # frontend:
   #   container_name: frontend
   #   build: 
