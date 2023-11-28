@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>サーバー情報編集</title>
+</head>
+<body>
+    <h1>サーバー情報編集</h1>
+    <form action="/rack/{{ .unitNumber }}/server/update/{{ .server.ServerName }}" method="post">
+        <div>
+            <label for="serverName">サーバー名:</label>
+            <input type="text" id="serverName" name="serverName" value="{{ .server.ServerName }}" required>
+        </div>
+        <div>
+            <label for="ipAddress">IPアドレス:</label>
+            <input type="text" id="ipAddress" name="ipAddress" value="{{ .server.IpAddress }}" required>
+        </div>
+        <div>
+            <label for="os">OS:</label>
+            <input type="text" id="os" name="os" value="{{ .server.Os }}" required>
+        </div>
+        <div>
+            <label for="cpu">CPU:</label>
+            <input type="text" id="cpu" name="cpu" value="{{ .server.Cpu }}" required>
+        </div>
+        <div>
+            <label for="memory">メモリ:</label>
+            <input type="text" id="memory" name="memory" value="{{ .server.Memory }}" required>
+        </div>
+        <div>
+            <label for="storage">ストレージ:</label>
+            <input type="text" id="storage" name="storage" value="{{ .server.Storage }}" required>
+        </div>
+        <div>
+            <button type="submit">更新</button>
+        </div>
+</body>
+</html>

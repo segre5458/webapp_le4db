@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>ラック一覧</title>
+</head>
+<body>
+    <h1>ラック一覧</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ラック番号</th>
+                <th>高さ</th>
+                <th>幅</th>
+                <th>仕様</th>
+                <th>奥行き</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{ if .racks }}
+            {{ range .racks }}
+            <tr>
+                <td>{{ .UnitNumber }}</td>
+                <td>{{ .Height }}</td>
+                <td>{{ .Width }}</td>
+                <td>{{ .Specification }}</td>
+                <td>{{ .Depth }}</td>
+                <td>
+                    <a href="/rack/{{ .UnitNumber }}/" {{if and (ne $.Role "rack") (ne $.Role "nw") (ne $.Role "server") (ne $.Role "admin") (ne $.Role "guest") }}onclick="return false;" style="color: gray;"{{ end }}>ラックの詳細</a>
+                    <a href="/edit/{{ .UnitNumber }}/" {{if and (ne $.Role "rack") (ne $.Role "admin") }}onclick="return false;" style="color: gray;"{{ end }}>情報の編集</a>
+                </td>
+            </tr>
+            {{ end }}
+            {{ else }}
+            <tr>
+                <td colspan="5">該当するレコードが見つかりません。</td>
+            </tr>
+            {{ end }}
+        </tbody>
+    </table>
+
+    <form action="/add" method="post">
+        <input type="text" name="unitNumber" placeholder="ラック番号">
+        <input type="text" name="height" placeholder="高さ">
+        <input type="text" name="width" placeholder="幅">
+        <input type="text" name="specification" placeholder="仕様">
+        <input type="text" name="depth" placeholder="奥行き">
+        <input type="submit" value="追加">
+    </form>
+
+    <form action="/delete" method="post">
+        <input type="text" name="unitNumber" placeholder="ラック番号">
+        <input type="submit" value="削除">
+    </form>
+
+    <form action="/search" method="get">
+        <input type="text" name="unitNumber" placeholder="ラック番号">
+        <input type="submit" value="検索">
+    </form>
+</body>
+</html>
