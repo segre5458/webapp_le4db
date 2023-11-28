@@ -11,6 +11,7 @@ services:
       POSTGRES_DB: postgres
     ports:
       - "5432:5432"
+    image: ghcr.io/segre5458/le4db/postgres:latest
   app:
     container_name: app
     build: 
@@ -23,7 +24,7 @@ services:
     links:
       - postgres
     tty: true 
-    image: ghcr.io/segre5458/webapp/le4db:latest
+    image: ghcr.io/segre5458/le4db/app:latest
   # frontend:
   #   container_name: frontend
   #   build: 
