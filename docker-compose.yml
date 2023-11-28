@@ -42,6 +42,7 @@ services:
       - postgres
       - app
     tty: true
+    image: ghcr.io/segre5458/le4db/frontend:latest
 volumes:
   node_modules:
     
