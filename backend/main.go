@@ -4,16 +4,12 @@ import (
 	"database/sql"
 	"log"
 
-	middleware "command-line-arguments/home/segre/KU/le4db/webapp/backend/middleware/auth.go"
-
-	"github.com/gin-contrib/cors"
+	_ "github.com/lib/pq"
+	"github.com/gin-gonic/gin"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/cookie"
-	"github.com/gin-gonic/gin"
-	_ "github.com/lib/pq"
 
 	"github.com/segre5458/webapp_le4db/backend/routes"
-	"github.com/segre5458/webapp_le4db/backend/middleware"
 )
 
 func main() {
@@ -26,11 +22,7 @@ func main() {
 	defer Db.Close()
 
 	router := gin.Default()
-    // router.LoadHTMLGlob("frontend/*.html")
-
-	router.Use(cors.New(middleware.CORS()))
-
-	// router.Use(gin.Static("/frontend-react/build"))
+    router.LoadHTMLGlob("frontend/*.html")
 
 	store := cookie.NewStore([]byte("secret"))
 	router.Use(sessions.Sessions("mysession", store))

@@ -25,21 +25,4 @@ services:
       - postgres
     tty: true 
     image: ghcr.io/segre5458/le4db/app:latest
-  frontend-react:
-    container_name: frontend-react
-    build: 
-      context: .
-      dockerfile: ./frontend-react/Dockerfile
-    volumes:
-      - ./frontend-react/src:/frontend-react/src
-    ports:
-      - "3000:3000"
-    depends_on:
-      - postgres
-      - app
-    links:
-      - postgres
-      - app
-    tty: true
-    image: ghcr.io/segre5458/le4db/frontend-react:latest
 
