@@ -3,6 +3,8 @@ package main
 import (
 	"database/sql"
 	"log"
+	"os"
+	"fmt"
 
 	_ "github.com/lib/pq"
 	"github.com/gin-gonic/gin"
@@ -14,8 +16,14 @@ import (
 
 func main() {
 	var Db *sql.DB
+	host := os.Getenv("POSTGRES_HOST")
+	user := os.Getenv("POSTGRES_USER")
+	password := os.Getenv("POSTGRES_PASSWORD")
+	dbName := os.Getenv("POSTGRES_DB")
 
-	Db, err := sql.Open("postgres", "host=postgres user=postgres password=postgres dbname=postgres sslmode=disable")
+	connStr := fmt.Sprintf("host=%s user=%s password=%s dbname=%s sslmode=disable", host, user, password, dbName)
+
+	Db, err := sql.Open("postgres", connStr)
 	if err != nil {
 		log.Fatal(err)
 	}
