@@ -25,7 +25,7 @@ services:
       - postgres
     tty: true 
     image: ghcr.io/segre5458/le4db/app:latest
-  frontend:
+  frontend-react:
     container_name: frontend-react
     build: 
       context: .
@@ -43,5 +43,6 @@ services:
       - app
     tty: true
     image: ghcr.io/segre5458/le4db/frontend-react:latest
-    
+volumes:
+  node_modules:
 
