@@ -10,6 +10,7 @@ RUN go get github.com/lib/pq@latest
 RUN go get github.com/gin-gonic/gin@latest
 RUN go get github.com/gin-contrib/sessions@latest
 RUN go get github.com/gin-contrib/sessions/cookie@latest
+RUN go get github.com/gin-contrib/cors
 RUN go mod tidy
 
 RUN go build -o main /go/src/github.com/segre5458/webapp_le4db/backend/.

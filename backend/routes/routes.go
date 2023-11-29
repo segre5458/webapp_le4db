@@ -2,6 +2,7 @@ package routes
 
 import (
 	"database/sql"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
 
@@ -11,7 +12,8 @@ import (
 
 func SetupRoutes(router *gin.Engine, context *gin.Context, Db *sql.DB) {
     router.GET("/login", func(c *gin.Context) {
-        c.HTML(200, "login.html", gin.H{})
+        // c.HTML(200, "login.html", gin.H{})
+        c.JSON(http.StatusOK, gin.H{"message": "Render login form"})
     })
     router.POST("/login", func(c *gin.Context) {
         controllers.Login(c, Db)
