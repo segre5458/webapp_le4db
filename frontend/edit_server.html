@@ -2,17 +2,17 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>ƒT[ƒo[î•ñ•ÒW</title>
+    <title>ã‚µãƒ¼ãƒãƒ¼æƒ…å ±ç·¨é›†</title>
 </head>
 <body>
-    <h1>ƒT[ƒo[î•ñ•ÒW</h1>
+    <h1>ã‚µãƒ¼ãƒãƒ¼æƒ…å ±ç·¨é›†</h1>
     <form action="/rack/{{ .unitNumber }}/server/update/{{ .server.ServerName }}" method="post">
         <div>
-            <label for="serverName">ƒT[ƒo[–¼:</label>
+            <label for="serverName">ã‚µãƒ¼ãƒãƒ¼å:</label>
             <input type="text" id="serverName" name="serverName" value="{{ .server.ServerName }}" required>
         </div>
         <div>
-            <label for="ipAddress">IPƒAƒhƒŒƒX:</label>
+            <label for="ipAddress">IPã‚¢ãƒ‰ãƒ¬ã‚¹:</label>
             <input type="text" id="ipAddress" name="ipAddress" value="{{ .server.IpAddress }}" required>
         </div>
         <div>
@@ -24,15 +24,15 @@
             <input type="text" id="cpu" name="cpu" value="{{ .server.Cpu }}" required>
         </div>
         <div>
-            <label for="memory">ƒƒ‚ƒŠ:</label>
+            <label for="memory">ãƒ¡ãƒ¢ãƒª:</label>
             <input type="text" id="memory" name="memory" value="{{ .server.Memory }}" required>
         </div>
         <div>
-            <label for="storage">ƒXƒgƒŒ[ƒW:</label>
+            <label for="storage">ã‚¹ãƒˆãƒ¬ãƒ¼ã‚¸:</label>
             <input type="text" id="storage" name="storage" value="{{ .server.Storage }}" required>
         </div>
         <div>
-            <button type="submit">XV</button>
+            <button type="submit">æ›´æ–°</button>
         </div>
 </body>
 </html>

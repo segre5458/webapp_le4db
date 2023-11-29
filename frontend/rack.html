@@ -1,125 +1,124 @@
-<h1>ƒ‰ƒbƒNÚ×</h1>
+<h1>ãƒ©ãƒƒã‚¯è©³ç´°</h1>
 
-<h2>ƒT[ƒo[</h2>
+<h2>ã‚µãƒ¼ãƒãƒ¼</h2>
 <table border="1">
-    <thead>
-        <tr>
-            <th>ƒT[ƒo[–¼</th>
-            <th>IPƒAƒhƒŒƒX</th>
-            <th>OS</th>
-            <th>CPU</th>
-            <th>ƒƒ‚ƒŠ</th>
-            <th>ƒXƒgƒŒ[ƒW</th>
-        </tr>
-    </thead>
-    <tbody>
-        {{ if .servers}}
-        {{ range .servers }}
-        <tr>
-            <td>{{ .ServerName }}</td>
-            <td>{{ .IpAddress }}</td>
-            <td>{{ .Os }}</td>
-            <td>{{ .Cpu }}</td>
-            <td>{{ .Memory }}</td>
-            <td>{{ .Storage }}</td>
-            <td>
-                <a href="/rack/{{ $.unitNumber }}/server/edit/{{ .ServerName }}">î•ñ‚Ì•ÒW</a>
-            </td>
-        </tr>
-        {{ end }}
-        {{ else }}
-        <tr>
-            <td colspan="6">ŠY“–‚·‚éƒŒƒR[ƒh‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB</td>
-        </tr>
-        {{ end }}
-    </tbody>
+  <thead>
+    <tr>
+      <th>ã‚µãƒ¼ãƒãƒ¼å</th>
+      <th>IPã‚¢ãƒ‰ãƒ¬ã‚¹</th>
+      <th>OS</th>
+      <th>CPU</th>
+      <th>ãƒ¡ãƒ¢ãƒª</th>
+      <th>ã‚¹ãƒˆãƒ¬ãƒ¼ã‚¸</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{ if .servers}} {{ range .servers }}
+    <tr>
+      <td>{{ .ServerName }}</td>
+      <td>{{ .IpAddress }}</td>
+      <td>{{ .Os }}</td>
+      <td>{{ .Cpu }}</td>
+      <td>{{ .Memory }}</td>
+      <td>{{ .Storage }}</td>
+      <td>
+        <a href="/rack/{{ $.unitNumber }}/server/edit/{{ .ServerName }}"
+          >æƒ…å ±ã®ç·¨é›†</a
+        >
+      </td>
+    </tr>
+    {{ end }} {{ else }}
+    <tr>
+      <td colspan="6">è©²å½“ã™ã‚‹ãƒ¬ã‚³ãƒ¼ãƒ‰ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚</td>
+    </tr>
+    {{ end }}
+  </tbody>
 </table>
 
-
-<h2>ƒlƒbƒgƒ[ƒN‹@Ší</h2>
+<h2>ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯æ©Ÿå™¨</h2>
 <table border="1">
-    <thead>
-        <tr>
-            <th>‹@Ší–¼</th>
-            <th>ƒ|[ƒg”</th>
-            <th>IPƒAƒhƒŒƒX</th>
-            <th>–ğŠ„</th>
-            <th>MACƒAƒhƒŒƒX</th>
-        </tr>
-    </thead>
-    <tbody>
-        {{ if .networkDevices }}
-        {{ range .networkDevices }}
-        <tr>
-            <td>{{ .DeviceName }}</td>
-            <td>{{ .PortCount }}</td>
-            <td>
-                {{ range .IpAddress }}
-                    <li>{{ . }}</li>
-                {{ end }}
-            </td>
-            <td>{{ .Role }}</td>
-            <td>
-                {{ range .PortMacAddress }}
-                    <li>{{ . }}</li>
-                {{ end }}
-            </td>
-            <td>
-                <a href="/rack/{{ $.unitNumber }}/networkDevice/edit/{{ .DeviceName }}">î•ñ‚Ì•ÒW</a>
-            </td>
-        </tr>
+  <thead>
+    <tr>
+      <th>æ©Ÿå™¨å</th>
+      <th>ãƒãƒ¼ãƒˆæ•°</th>
+      <th>IPã‚¢ãƒ‰ãƒ¬ã‚¹</th>
+      <th>å½¹å‰²</th>
+      <th>MACã‚¢ãƒ‰ãƒ¬ã‚¹</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{ if .networkDevices }} {{ range .networkDevices }}
+    <tr>
+      <td>{{ .DeviceName }}</td>
+      <td>{{ .PortCount }}</td>
+      <td>
+        {{ range .IpAddress }}
+        <li>{{ . }}</li>
         {{ end }}
-        {{ else }}
-        <tr>
-            <td colspan="3">ŠY“–‚·‚éƒŒƒR[ƒh‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB</td>
-        </tr>
+      </td>
+      <td>{{ .Role }}</td>
+      <td>
+        {{ range .PortMacAddress }}
+        <li>{{ . }}</li>
         {{ end }}
-    </tbody>
+      </td>
+      <td>
+        <a href="/rack/{{ $.unitNumber }}/networkDevice/edit/{{ .DeviceName }}"
+          >æƒ…å ±ã®ç·¨é›†</a
+        >
+      </td>
+    </tr>
+    {{ end }} {{ else }}
+    <tr>
+      <td colspan="3">è©²å½“ã™ã‚‹ãƒ¬ã‚³ãƒ¼ãƒ‰ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚</td>
+    </tr>
+    {{ end }}
+  </tbody>
 </table>
 
-<h3>ƒT[ƒo[ŒŸõ</h3>
+<h3>ã‚µãƒ¼ãƒãƒ¼æ¤œç´¢</h3>
 <form action="/rack/{{ .unitNumber }}/server/add" method="post">
-    <input type="hidden" name="unitNumber" value="{{ .unitNumber }}">
-    <input type="text" name="serverName" placeholder="ƒT[ƒo[–¼">
-    <input type="text" name="ipAddress" placeholder="IPƒAƒhƒŒƒX">
-    <input type="text" name="os" placeholder="OS">
-    <input type="text" name="cpu" placeholder="CPU">
-    <input type="text" name="memory" placeholder="ƒƒ‚ƒŠ">
-    <input type="text" name="storage" placeholder="ƒXƒgƒŒ[ƒW">
-    <input type="submit" value="’Ç‰Á">
+  <input type="hidden" name="unitNumber" value="{{ .unitNumber }}" />
+  <input type="text" name="serverName" placeholder="ã‚µãƒ¼ãƒãƒ¼å" />
+  <input type="text" name="ipAddress" placeholder="IPã‚¢ãƒ‰ãƒ¬ã‚¹" />
+  <input type="text" name="os" placeholder="OS" />
+  <input type="text" name="cpu" placeholder="CPU" />
+  <input type="text" name="memory" placeholder="ãƒ¡ãƒ¢ãƒª" />
+  <input type="text" name="storage" placeholder="ã‚¹ãƒˆãƒ¬ãƒ¼ã‚¸" />
+  <input type="submit" value="è¿½åŠ " />
 </form>
 
 <form action="/rack/{{ .unitNumber }}/server/search" method="get">
-    <input type="hidden" name="unitNumber" value="{{ .unitNumber }}">
-    <input type="text" name="serverName" placeholder="ƒT[ƒo[–¼">
-    <input type="submit" value="ŒŸõ">
+  <input type="hidden" name="unitNumber" value="{{ .unitNumber }}" />
+  <input type="text" name="serverName" placeholder="ã‚µãƒ¼ãƒãƒ¼å" />
+  <input type="submit" value="æ¤œç´¢" />
 </form>
 
 <form action="/rack/{{ .unitNumber }}/server/delete" method="post">
-    <input type="hidden" name="unitNumber" value="{{ .unitNumber }}">
-    <input type="text" name="serverName" placeholder="ƒT[ƒo[–¼">
-    <input type="submit" value="íœ">
+  <input type="hidden" name="unitNumber" value="{{ .unitNumber }}" />
+  <input type="text" name="serverName" placeholder="ã‚µãƒ¼ãƒãƒ¼å" />
+  <input type="submit" value="å‰Šé™¤" />
 </form>
 
-<h3>ƒlƒbƒgƒ[ƒN‹@ŠíŒŸõ</h3>
+<h3>ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯æ©Ÿå™¨æ¤œç´¢</h3>
 <form action="/rack/{{ .unitNumber }}/networkDevice/add" method="post">
-    <input type="hidden" name="unitNumber" value="{{ .unitNumber }}">
-    <input type="text" name="deviceName" placeholder="‹@Ší–¼">
-    <input type="text" name="portCount" placeholder="ƒ|[ƒg”">
-    <input type="text" name="ipAddresses" placeholder="IPƒAƒhƒŒƒX">
-    <input type="text" name="role" placeholder="–ğŠ„">
-    <input type="text" name="portMacAddresses" placeholder="MACƒAƒhƒŒƒX">
-    <input type="submit" value="’Ç‰Á">
+  <input type="hidden" name="unitNumber" value="{{ .unitNumber }}" />
+  <input type="text" name="deviceName" placeholder="æ©Ÿå™¨å" />
+  <input type="text" name="portCount" placeholder="ãƒãƒ¼ãƒˆæ•°" />
+  <input type="text" name="ipAddresses" placeholder="IPã‚¢ãƒ‰ãƒ¬ã‚¹" />
+  <input type="text" name="role" placeholder="å½¹å‰²" />
+  <input type="text" name="portMacAddresses" placeholder="MACã‚¢ãƒ‰ãƒ¬ã‚¹" />
+  <input type="submit" value="è¿½åŠ " />
 </form>
 
 <form action="/rack/{{ .unitNumber }}/networkDevice/search" method="get">
-    <input type="hidden" name="unitNumber" value="{{ .unitNumber }}">
-    <input type="text" name="deviceName" placeholder="‹@Ší–¼">
-    <input type="submit" value="ŒŸõ">
+  <input type="hidden" name="unitNumber" value="{{ .unitNumber }}" />
+  <input type="text" name="deviceName" placeholder="æ©Ÿå™¨å" />
+  <input type="submit" value="æ¤œç´¢" />
 </form>
 
 <form action="/rack/{{ .rack.unitNumber }}/networkDevice/delete" method="post">
-    <input type="hidden" name="unitNumber" value="{{ .unitNumber }}">
-    <input type="text" name="deviceName" placeholder="‹@Ší–¼">
-    <input type="submit" value="íœ">
+  <input type="hidden" name="unitNumber" value="{{ .unitNumber }}" />
+  <input type="text" name="deviceName" placeholder="æ©Ÿå™¨å" />
+  <input type="submit" value="å‰Šé™¤" />
 </form>

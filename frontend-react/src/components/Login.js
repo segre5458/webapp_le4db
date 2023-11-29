@@ -8,13 +8,25 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    if (!username || !password) {
-      setError("Username and password are required.");
-      return;
-    }
+    const response = await fetch("/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username,
+        password,
+      }),
+    });
 
-    setError("");
-    console.log("Login successful!");
+    const data = await response.json();
+
+    if (data.success) {
+      setError("");
+      console.log("Login successful!");
+    } else {
+      setError(data.error || "Login failed");
+    }
   };
 
   return (

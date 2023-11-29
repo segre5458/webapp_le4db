@@ -22,9 +22,7 @@ func main() {
 	defer Db.Close()
 
 	router := gin.Default()
-    // router.LoadHTMLGlob("frontend/*.html")
-	router.Static("/static", "./frontend-react/build/static")
-	router.LoadHTMLFiles("frontend-react/build/index.html")
+    router.LoadHTMLGlob("frontend/*.html")
 
 	store := cookie.NewStore([]byte("secret"))
 	router.Use(sessions.Sessions("mysession", store))

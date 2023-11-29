@@ -2,33 +2,33 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>ƒlƒbƒgƒ[ƒN‹@Šíî•ñ•ÒW</title>
+    <title>ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯æ©Ÿå™¨æƒ…å ±ç·¨é›†</title>
 </head>
 <body>
-    <h1>ƒlƒbƒgƒ[ƒN‹@Šíî•ñ•ÒW</h1>
+    <h1>ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯æ©Ÿå™¨æƒ…å ±ç·¨é›†</h1>
     <form action="/rack/{{ .unitNumber }}/networkDevice/update/{{ .networkDevice.DeviceName }}" method="post">
         <div>
-            <label for="deviceName">‹@Ší–¼:</label>
+            <label for="deviceName">æ©Ÿå™¨å:</label>
             <input type="text" id="deviceName" name="deviceName" value="{{ .networkDevice.DeviceName }}" required>
         </div>
         <div>
-            <label for="portCount">ƒ|[ƒg”:</label>
+            <label for="portCount">ãƒãƒ¼ãƒˆæ•°:</label>
             <input type="text" id="portCount" name="portCount" value="{{ .networkDevice.PortCount }}" required>
         </div>
         <div>
-            <label for="ipAddress">IPƒAƒhƒŒƒX:</label>
+            <label for="ipAddress">IPã‚¢ãƒ‰ãƒ¬ã‚¹:</label>
             <input type="text" id="ipAddress" name="ipAddress" value="{{ .IpAddressStr }}" required>
         </div>
         <div>
-            <label for="role">–ðŠ„:</label>
+            <label for="role">å½¹å‰²:</label>
             <input type="text" id="role" name="role" value="{{ .networkDevice.Role }}" required>
         </div>
         <div>
-            <label for="macAddress">MACƒAƒhƒŒƒX:</label>
+            <label for="macAddress">MACã‚¢ãƒ‰ãƒ¬ã‚¹:</label>
             <input type="text" id="portMacAddress" name="portMacAddress" value="{{ .portMacAddressStr }}" required>
         </div>
         <div>
-            <button type="submit">XV</button>
+            <button type="submit">æ›´æ–°</button>
         </div>
 </body>
 </html>

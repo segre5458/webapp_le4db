@@ -1,11 +1,10 @@
 FROM node:alpine
 
-WORKDIR /usr/src/app
+RUN mkdir -p /webapp_le4db
+COPY . /webapp_le4db
+WORKDIR /webapp_le4db/frontend-react
 
-COPY package*.json ./
 RUN npm install
-
-COPY . .
 
 RUN npm run build
 

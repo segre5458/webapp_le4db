@@ -1,35 +1,65 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <title>ƒ‰ƒbƒNî•ñ•ÒW</title>
-</head>
-<body>
-    <h1>ƒ‰ƒbƒNî•ñ•ÒW</h1>
+  <head>
+    <meta charset="UTF-8" />
+    <title>ãƒ©ãƒƒã‚¯æƒ…å ±ç·¨é›†</title>
+  </head>
+  <body>
+    <h1>ãƒ©ãƒƒã‚¯æƒ…å ±ç·¨é›†</h1>
     <form action="/update/{{ .rack.UnitNumber }}" method="post">
-        <div>
-            <label for="height">‚‚³:</label>
-            <input type="text" id="height" name="height" value="{{ .rack.Height }}" required>
-        </div>
-        <div>
-            <label for="unitNumber">ƒ‰ƒbƒN”Ô†:</label>
-            <input type="text" id="unitNumber" name="unitNumber" value="{{ .rack.UnitNumber }}" required>
-        </div>
-        <div>
-            <label for="width">•:</label>
-            <input type="text" id="width" name="width" value="{{ .rack.Width }}" required>
-        </div>
-        <div>
-            <label for="specification">Žd—l:</label>
-            <input type="text" id="specification" name="specification" value="{{ .rack.Specification }}" required>
-        </div>
-        <div>
-            <label for="depth">‰œs‚«:</label>
-            <input type="text" id="depth" name="depth" value="{{ .rack.Depth }}" required>
-        </div>
-        <div>
-            <button type="submit">XV</button>
-        </div>
+      <div>
+        <label for="height">é«˜ã•:</label>
+        <input
+          type="text"
+          id="height"
+          name="height"
+          value="{{ .rack.Height }}"
+          required
+        />
+      </div>
+      <div>
+        <label for="unitNumber">ãƒ©ãƒƒã‚¯ç•ªå·:</label>
+        <input
+          type="text"
+          id="unitNumber"
+          name="unitNumber"
+          value="{{ .rack.UnitNumber }}"
+          required
+        />
+      </div>
+      <div>
+        <label for="width">å¹…:</label>
+        <input
+          type="text"
+          id="width"
+          name="width"
+          value="{{ .rack.Width }}"
+          required
+        />
+      </div>
+      <div>
+        <label for="specification">ä»•æ§˜:</label>
+        <input
+          type="text"
+          id="specification"
+          name="specification"
+          value="{{ .rack.Specification }}"
+          required
+        />
+      </div>
+      <div>
+        <label for="depth">å¥¥è¡Œã:</label>
+        <input
+          type="text"
+          id="depth"
+          name="depth"
+          value="{{ .rack.Depth }}"
+          required
+        />
+      </div>
+      <div>
+        <button type="submit">æ›´æ–°</button>
+      </div>
     </form>
-</body>
+  </body>
 </html>

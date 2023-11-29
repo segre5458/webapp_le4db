@@ -2,18 +2,18 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>ƒ‰ƒbƒNˆê——</title>
+    <title>ãƒ©ãƒƒã‚¯ä¸€è¦§</title>
 </head>
 <body>
-    <h1>ƒ‰ƒbƒNˆê——</h1>
+    <h1>ãƒ©ãƒƒã‚¯ä¸€è¦§</h1>
     <table border="1">
         <thead>
             <tr>
-                <th>ƒ‰ƒbƒN”Ô†</th>
-                <th>‚‚³</th>
-                <th>•</th>
-                <th>Žd—l</th>
-                <th>‰œs‚«</th>
+                <th>ãƒ©ãƒƒã‚¯ç•ªå·</th>
+                <th>é«˜ã•</th>
+                <th>å¹…</th>
+                <th>ä»•æ§˜</th>
+                <th>å¥¥è¡Œã</th>
             </tr>
         </thead>
         <tbody>
@@ -26,36 +26,36 @@
                 <td>{{ .Specification }}</td>
                 <td>{{ .Depth }}</td>
                 <td>
-                    <a href="/rack/{{ .UnitNumber }}/" {{if and (ne $.Role "rack") (ne $.Role "nw") (ne $.Role "server") (ne $.Role "admin") (ne $.Role "guest") }}onclick="return false;" style="color: gray;"{{ end }}>ƒ‰ƒbƒN‚ÌÚ×</a>
-                    <a href="/edit/{{ .UnitNumber }}/" {{if and (ne $.Role "rack") (ne $.Role "admin") }}onclick="return false;" style="color: gray;"{{ end }}>î•ñ‚Ì•ÒW</a>
+                    <a href="/rack/{{ .UnitNumber }}/" {{if and (ne $.Role "rack") (ne $.Role "nw") (ne $.Role "server") (ne $.Role "admin") (ne $.Role "guest") }}onclick="return false;" style="color: gray;"{{ end }}>ãƒ©ãƒƒã‚¯ã®è©³ç´°</a>
+                    <a href="/edit/{{ .UnitNumber }}/" {{if and (ne $.Role "rack") (ne $.Role "admin") }}onclick="return false;" style="color: gray;"{{ end }}>æƒ…å ±ã®ç·¨é›†</a>
                 </td>
             </tr>
             {{ end }}
             {{ else }}
             <tr>
-                <td colspan="5">ŠY“–‚·‚éƒŒƒR[ƒh‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB</td>
+                <td colspan="5">è©²å½“ã™ã‚‹ãƒ¬ã‚³ãƒ¼ãƒ‰ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚</td>
             </tr>
             {{ end }}
         </tbody>
     </table>
 
     <form action="/add" method="post">
-        <input type="text" name="unitNumber" placeholder="ƒ‰ƒbƒN”Ô†">
-        <input type="text" name="height" placeholder="‚‚³">
-        <input type="text" name="width" placeholder="•">
-        <input type="text" name="specification" placeholder="Žd—l">
-        <input type="text" name="depth" placeholder="‰œs‚«">
-        <input type="submit" value="’Ç‰Á">
+        <input type="text" name="unitNumber" placeholder="ãƒ©ãƒƒã‚¯ç•ªå·">
+        <input type="text" name="height" placeholder="é«˜ã•">
+        <input type="text" name="width" placeholder="å¹…">
+        <input type="text" name="specification" placeholder="ä»•æ§˜">
+        <input type="text" name="depth" placeholder="å¥¥è¡Œã">
+        <input type="submit" value="è¿½åŠ ">
     </form>
 
     <form action="/delete" method="post">
-        <input type="text" name="unitNumber" placeholder="ƒ‰ƒbƒN”Ô†">
-        <input type="submit" value="íœ">
+        <input type="text" name="unitNumber" placeholder="ãƒ©ãƒƒã‚¯ç•ªå·">
+        <input type="submit" value="å‰Šé™¤">
     </form>
 
     <form action="/search" method="get">
-        <input type="text" name="unitNumber" placeholder="ƒ‰ƒbƒN”Ô†">
-        <input type="submit" value="ŒŸõ">
+        <input type="text" name="unitNumber" placeholder="ãƒ©ãƒƒã‚¯ç•ªå·">
+        <input type="submit" value="æ¤œç´¢">
     </form>
 </body>
 </html>
