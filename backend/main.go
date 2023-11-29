@@ -8,8 +8,10 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/cookie"
+	"github.com/gin-contrib/cors"
 
 	"github.com/segre5458/webapp_le4db/backend/routes"
+	
 )
 
 func main() {
@@ -23,6 +25,10 @@ func main() {
 
 	router := gin.Default()
     router.LoadHTMLGlob("frontend/*.html")
+
+	config := cors.DefaultConfig()
+	config.AllowOrigins = []string{"http://localhost:3000"}
+	router.Use(cors.New(config))
 
 	store := cookie.NewStore([]byte("secret"))
 	router.Use(sessions.Sessions("mysession", store))
