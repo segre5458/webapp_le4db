@@ -1,0 +1,10 @@
+# docker-compose.yml
+version: '3'
+
+services:
+  codeql:
+    build:
+      context: .
+      dockerfile: Dockerfile-codeql
+    volumes:
+      - .:/code
