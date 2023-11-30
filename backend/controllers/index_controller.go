@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"database/sql"
-	"fmt"
 	"log"
 
 	"github.com/gin-contrib/sessions"
@@ -15,7 +14,6 @@ func Index(ctx *gin.Context, DB *sql.DB) {
 	sql := "SELECT * FROM RACK"
 	session := sessions.Default(ctx)
 	userRole := session.Get("role")
-	fmt.Println(userRole)
 	var racks []models.Rack
 	rows, err := DB.Query(sql)
 	if err != nil {

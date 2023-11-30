@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/gin-gonic/gin"
+	"github.com/gin-contrib/sessions"
 
 	"github.com/segre5458/webapp_le4db/backend/models"
 )
@@ -43,6 +44,9 @@ func AddNetworkDevice(ctx *gin.Context, DB *sql.DB) {
 func SearchNetworkDevice(ctx *gin.Context, DB *sql.DB) {
 	deviceName := ctx.Query("deviceName")
 
+	session := sessions.Default(ctx)
+	userRole := session.Get("role")
+
 	sql := `
 	SELECT DISTINCT nd.*
 	FROM NETWORK_DEVICE nd
@@ -73,6 +77,7 @@ func SearchNetworkDevice(ctx *gin.Context, DB *sql.DB) {
 
 	ctx.HTML(200, "rack.html", gin.H{
 		"networkDevices": networkDevices,
+		"Role": userRole,
 	})
 }
 

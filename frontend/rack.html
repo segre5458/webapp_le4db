@@ -22,7 +22,7 @@
       <td>{{ .Memory }}</td>
       <td>{{ .Storage }}</td>
       <td>
-        <a href="/rack/{{ $.unitNumber }}/server/edit/{{ .ServerName }}"
+        <a href="/rack/{{ $.unitNumber }}/server/edit/{{ .ServerName }}" {{if and (ne $.Role "rack") (ne $.Role "admin") (ne $.Role "server") }}onclick="return false;" style="color: gray;"{{ end }}
           >情報の編集</a
         >
       </td>
@@ -63,7 +63,7 @@
         {{ end }}
       </td>
       <td>
-        <a href="/rack/{{ $.unitNumber }}/networkDevice/edit/{{ .DeviceName }}"
+        <a href="/rack/{{ $.unitNumber }}/networkDevice/edit/{{ .DeviceName }}" {{if and (ne $.Role "rack") (ne $.Role "admin") (ne $.Role "nw") }}onclick="return false;" style="color: gray;"{{ end }}
           >情報の編集</a
         >
       </td>
@@ -76,8 +76,8 @@
   </tbody>
 </table>
 
-<h3>サーバー検索</h3>
-<form action="/rack/{{ .unitNumber }}/server/add" method="post">
+<h3>サーバー追加</h3>
+<form action="/rack/{{ .unitNumber }}/server/add" method="post" {{if and (ne $.Role "rack") (ne $.Role "admin") (ne $.Role "server") }}onclick="return false;" style="color: gray;"{{ end }}>
   <input type="hidden" name="unitNumber" value="{{ .unitNumber }}" />
   <input type="text" name="serverName" placeholder="サーバー名" />
   <input type="text" name="ipAddress" placeholder="IPアドレス" />
@@ -88,20 +88,22 @@
   <input type="submit" value="追加" />
 </form>
 
-<form action="/rack/{{ .unitNumber }}/server/search" method="get">
+<h3>サーバー検索</h3>
+<form action="/rack/{{ .unitNumber }}/server/search" method="get" >
   <input type="hidden" name="unitNumber" value="{{ .unitNumber }}" />
   <input type="text" name="serverName" placeholder="サーバー名" />
   <input type="submit" value="検索" />
 </form>
 
-<form action="/rack/{{ .unitNumber }}/server/delete" method="post">
+<h3>サーバー削除</h3>
+<form action="/rack/{{ .unitNumber }}/server/delete" method="post" {{if and (ne $.Role "rack") (ne $.Role "admin") (ne $.Role "server") }}onclick="return false;" style="color: gray;"{{ end }}>
   <input type="hidden" name="unitNumber" value="{{ .unitNumber }}" />
   <input type="text" name="serverName" placeholder="サーバー名" />
   <input type="submit" value="削除" />
 </form>
 
-<h3>ネットワーク機器検索</h3>
-<form action="/rack/{{ .unitNumber }}/networkDevice/add" method="post">
+<h3>ネットワーク機器追加</h3>
+<form action="/rack/{{ .unitNumber }}/networkDevice/add" method="post" {{if and (ne $.Role "rack") (ne $.Role "admin") (ne $.Role "nw") }}onclick="return false;" style="color: gray;"{{ end }}>
   <input type="hidden" name="unitNumber" value="{{ .unitNumber }}" />
   <input type="text" name="deviceName" placeholder="機器名" />
   <input type="text" name="portCount" placeholder="ポート数" />
@@ -111,13 +113,15 @@
   <input type="submit" value="追加" />
 </form>
 
+<h3>ネットワーク機器検索</h3>
 <form action="/rack/{{ .unitNumber }}/networkDevice/search" method="get">
   <input type="hidden" name="unitNumber" value="{{ .unitNumber }}" />
   <input type="text" name="deviceName" placeholder="機器名" />
   <input type="submit" value="検索" />
 </form>
 
-<form action="/rack/{{ .rack.unitNumber }}/networkDevice/delete" method="post">
+<h3>ネットワーク機器削除</h3>
+<form action="/rack/{{ .rack.unitNumber }}/networkDevice/delete" method="post" {{if and (ne $.Role "rack") (ne $.Role "admin") (ne $.Role "nw") }}onclick="return false;" style="color: gray;"{{ end }}>
   <input type="hidden" name="unitNumber" value="{{ .unitNumber }}" />
   <input type="text" name="deviceName" placeholder="機器名" />
   <input type="submit" value="削除" />
