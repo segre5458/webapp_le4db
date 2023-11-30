@@ -39,7 +39,7 @@
         </tbody>
     </table>
 
-    <form action="/add" method="post">
+    <form action="/add" method="post" {{if and (ne $.Role "rack") (ne $.Role "admin") }}onclick="return false;" style="color: gray;"{{ end }}>
         <input type="text" name="unitNumber" placeholder="ラック番号">
         <input type="text" name="height" placeholder="高さ">
         <input type="text" name="width" placeholder="幅">
@@ -48,7 +48,7 @@
         <input type="submit" value="追加">
     </form>
 
-    <form action="/delete" method="post">
+    <form action="/delete" method="post" {{if and (ne $.Role "rack") (ne $.Role "admin") }}onclick="return false;" style="color: gray;"{{ end }}>
         <input type="text" name="unitNumber" placeholder="ラック番号">
         <input type="submit" value="削除">
     </form>

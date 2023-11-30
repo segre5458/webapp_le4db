@@ -65,6 +65,9 @@ func SearchRack(ctx *gin.Context, DB *sql.DB) {
 		log.Fatal(err)
 	}
 
+	session := sessions.Default(ctx)
+	userRole := session.Get("role")
+
 	for rows.Next() {
 		var rack models.Rack
 		err := rows.Scan(&rack.Height, &rack.UnitNumber, &rack.Width, &rack.Specification, &rack.Depth)
@@ -75,6 +78,7 @@ func SearchRack(ctx *gin.Context, DB *sql.DB) {
 	}
 	ctx.HTML(200, "index.html", gin.H{
 		"racks": racks,
+		"Role": userRole,
 	})
 }
 
